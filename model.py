@@ -15,8 +15,12 @@ def create_empty_board():
     board=np.zeros((3,3),dtype=int)
     return board
 
-# Step 2 - encode_player (not yet solved)
-# TODO: implement
+# Step 2 - encode_player
+def encode_player(player):
+    """Return the integer encoding for 'X', 'O', or 'empty'."""
+    # TODO: map 'X' to 1, 'O' to -1, 'empty' to 0
+    d={"X":1,"O":-1,"empty":0}
+    return d[player]
 
 # Step 3 - print_board (not yet solved)
 # TODO: implement
