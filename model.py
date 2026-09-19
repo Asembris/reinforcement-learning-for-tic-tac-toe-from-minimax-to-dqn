@@ -114,8 +114,13 @@ def is_winner(board, player):
         or check_anti_diagonal_win(board, player)
     )
 
-# Step 12 - is_draw (not yet solved)
-# TODO: implement
+# Step 12 - is_draw
+import numpy as np
+
+def is_draw(board):
+    """Return True iff the board is full and neither player has won."""
+    # TODO: combine a full-board check with a no-winner check
+    return bool(len(get_legal_moves(board))==0 and not is_winner(board,-1) and not is_winner(board,1))
 
 # Step 13 - get_game_status (not yet solved)
 # TODO: implement
