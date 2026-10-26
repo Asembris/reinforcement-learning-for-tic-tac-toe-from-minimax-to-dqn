@@ -233,8 +233,20 @@ def random_move_agent(board, player, rng):
     res=rng.choice(len(moves))
     return moves[res]
 
-# Step 20 - play_random_vs_random_game (not yet solved)
-# TODO: implement
+# Step 20 - play_random_vs_random_game
+def play_random_vs_random_game(rng):
+    """Simulate one full random-vs-random game and return the final status."""
+    # TODO: loop until terminal, alternating random moves between X and O
+    board=create_empty_board()
+    player=1
+    while True:
+        row,col=random_move_agent(board,player,rng)
+        board=place_move(board,row,col,player)
+        if get_game_status(board)!="ongoing":
+            break
+        player=switch_player(player)
+    
+    return get_game_status(board)
 
 # Step 21 - play_random_vs_random_matches (not yet solved)
 # TODO: implement
