@@ -438,8 +438,41 @@ def play_minimax_vs_random_matches(n_games, minimax_plays_x, rng):
 
     return compute_outcome_rates(outcomes)
 
-# Step 30 - play_minimax_vs_minimax_matches (not yet solved)
-# TODO: implement
+# Step 30 - play_minimax_vs_minimax_matches
+def play_minimax_vs_minimax_matches(n_games):
+    """Play n_games minimax-vs-minimax games and report results."""
+    outcomes = []
+
+    for _ in range(n_games):
+        board = create_empty_board()
+        player = 1
+
+        for _ in range(9):
+            if get_game_status(board) != "ongoing":
+                break
+
+            _, move = minimax_alpha_beta(
+                board, player, float("-inf"), float("inf")
+            )
+
+            row, col = move
+            board = place_move(board, row, col, player)
+            player = switch_player(player)
+
+        outcomes.append(get_game_status(board))
+
+    if n_games == 0:
+        rates = {
+            "x_win_rate": 0.0,
+            "o_win_rate": 0.0,
+            "draw_rate": 0.0
+        }
+    else:
+        rates = compute_outcome_rates(outcomes)
+
+    rates["all_draws"] = all(status == "draw" for status in outcomes)
+
+    return rates
 
 # Step 31 - encode_board_state_key (not yet solved)
 # TODO: implement
