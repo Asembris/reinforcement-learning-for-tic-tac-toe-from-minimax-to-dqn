@@ -407,8 +407,36 @@ def minimax_alpha_beta(board, player, alpha, beta):
 
     return best_score, best_move
 
-# Step 29 - play_minimax_vs_random_matches (not yet solved)
-# TODO: implement
+# Step 29 - play_minimax_vs_random_matches
+def play_minimax_vs_random_matches(n_games, minimax_plays_x, rng):
+    outcomes = []
+    minimax_player = 1 if minimax_plays_x else -1
+    if n_games == 0:
+        return {
+            "x_win_rate": 0.0,
+            "o_win_rate": 0.0,
+            "draw_rate": 0.0
+        }
+    for _ in range(n_games):
+        board = create_empty_board()
+        player = 1
+
+        for _ in range(9):
+            if get_game_status(board) != "ongoing":
+                break
+
+            if player == minimax_player:
+                move = minimax_best_move(board, player)
+            else:
+                move = random_move_agent(board, player, rng)
+
+            row, col = move
+            board = place_move(board, row, col, player)
+            player = switch_player(player)
+
+        outcomes.append(get_game_status(board))
+
+    return compute_outcome_rates(outcomes)
 
 # Step 30 - play_minimax_vs_minimax_matches (not yet solved)
 # TODO: implement
