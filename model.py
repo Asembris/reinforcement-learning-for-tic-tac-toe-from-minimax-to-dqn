@@ -488,8 +488,21 @@ def encode_board_state_key(board):
             res+=d[e]
     return res
 
-# Step 32 - canonical_board_key (not yet solved)
-# TODO: implement
+# Step 32 - canonical_board_key
+import numpy as np
+
+
+def canonical_board_key(board):
+    # TODO: return the lex-smallest encoded key over all 8 symmetries of the board.
+    keys = []
+
+    for k in range(4):
+        rotated = np.rot90(board, k)
+
+        keys.append(encode_board_state_key(rotated))
+        keys.append(encode_board_state_key(np.fliplr(rotated)))
+
+    return min(keys)
 
 # Step 33 - initialize_q_table (not yet solved)
 # TODO: implement
